@@ -1,7 +1,8 @@
 # arduino
-```arduino
+
+``` arduino 
 int a= 9;
-int b=10;
+int b= 10;
 void setup() {
   pinMode(5,INPUT_PULLUP);
   pinMode(a, OUTPUT);
