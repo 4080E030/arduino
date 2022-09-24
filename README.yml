@@ -1,5 +1,5 @@
 # arduino
-
+## 按鈕開燈
 ``` arduino 
 int a= 9;
 int b= 10;
@@ -14,7 +14,7 @@ void loop() {
   value=digitalRead(5);
   if(value==0)   //如果是0的話就會亮
   {
-  digitalWrite(a,1 );
+  digitalWrite(a,1 );  // a亮,b不會亮 
   digitalWrite(b,0);   
   }
   else
