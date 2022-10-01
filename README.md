@@ -14,7 +14,7 @@ void loop() {
   value=digitalRead(5);
   if(value==0)   //如果是0的話就會亮，0就是按下去
   {
-  digitalWrite(a,1 );  // a亮,b不會亮 
+  digitalWrite(a,1 );  // a亮,b不會亮 ，要亮兩個就都改1
   digitalWrite(b,0);   
   }
   else
