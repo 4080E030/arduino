@@ -4,14 +4,14 @@
 int a= 9;
 int b= 10;
 void setup() {
-  pinMode(5,INPUT_PULLUP);
+  pinMode(5,INPUT_PULLUP); //5為設的開關 你線拉5就是5
   pinMode(a, OUTPUT);
   pinMode(b, OUTPUT);
 }
 
 void loop() {
   int value;
-  value=digitalRead(5);
+  value=digitalRead(5); //對應到上面的數字 5
   if(value==0)   //如果是0的話就會亮，0就是按下去
   {
   digitalWrite(a,1 );  // a亮,b不會亮 ，要亮兩個就都改1
