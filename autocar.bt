@@ -1,0 +1,105 @@
+#include <SoftwareSerial.h>
+#include <Wire.h>
+
+SoftwareSerial CAR_BT(11,12); //定義 PIN11 及 PIN12 分別為 RX 及 TX 腳位
+
+/* Input for leftMotor:
+   IN1      IN2      Action
+   LOW      LOW      Stop
+   HIGH     LOW      Forward  
+   LOW      HIGH     Backward
+   HIGH     HIGH     Stop
+*/
+
+const int leftMotorIn1 = 9;
+const int leftMotorIn2 = 10;
+int mot1=70;
+int mot2=70;
+int mot3=80;
+int mot4=80;
+
+/* Input for rightMotor:
+   IN3      IN4      Action
+   LOW      LOW      Stop
+   HIGH     LOW      Forward  
+   LOW      HIGH     Backward
+   HIGH     HIGH     Stop
+*/
+
+const int rightMotorIn3 = 5;      
+const int rightMotorIn4 = 6;
+
+bool isForward = true;
+
+void setup()  
+{
+  pinMode(leftMotorIn1, OUTPUT);
+  pinMode(leftMotorIn2, OUTPUT);
+  pinMode(rightMotorIn3, OUTPUT);
+  pinMode(rightMotorIn4, OUTPUT);
+  Serial.begin(9600); //Arduino起始鮑率：9600
+  CAR_BT.begin(9600); //藍牙鮑率：9600 注意！每個藍牙晶片的鮑率都不太一樣，請務必確認
+}
+
+
+
+void loop()
+{
+  forward();
+  delay(1000);
+  
+}
+
+void motorstop()
+{
+  analogWrite(leftMotorIn1, 0);
+  analogWrite(leftMotorIn2, 0);
+  analogWrite(rightMotorIn3, 0);
+  analogWrite(rightMotorIn4, 0);
+}
+
+void forward()
+{
+  analogWrite(leftMotorIn1, mot1);
+  analogWrite(leftMotorIn2, 0);
+  analogWrite(rightMotorIn3, mot3);
+  analogWrite(rightMotorIn4, 0);
+}
+
+void backward()
+{
+  analogWrite(leftMotorIn1, 0);
+  analogWrite(leftMotorIn2, mot2);
+  analogWrite(rightMotorIn3, 0);
+  analogWrite(rightMotorIn4, mot4);
+}
+
+void right()
+{
+  if( isForward ) {
+    analogWrite(leftMotorIn1, mot1);
+    analogWrite(leftMotorIn2, 0);
+    analogWrite(rightMotorIn3, 0);
+    analogWrite(rightMotorIn4, mot4);
+  } else {
+    analogWrite(leftMotorIn1, 0);
+    analogWrite(leftMotorIn2, mot2);
+    analogWrite(rightMotorIn3, mot3);
+    analogWrite(rightMotorIn4, 0);
+  }
+}
+
+void left()
+{
+  if( isForward ) {
+    analogWrite(leftMotorIn1, 0);
+    analogWrite(leftMotorIn2, mot2);
+    analogWrite(rightMotorIn3, mot3);
+    analogWrite(rightMotorIn4, 0);
+  } else {
+    analogWrite(leftMotorIn1, mot1);
+    analogWrite(leftMotorIn2, 0);
+    analogWrite(rightMotorIn3, 0);
+    analogWrite(rightMotorIn4, mot4);
+  }
+}
